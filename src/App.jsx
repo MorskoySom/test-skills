@@ -1,13 +1,11 @@
+import { Component } from 'react'
 import './App.css'
 
-function App() {  
-
-  return (
-    <>      
-      <h1>Vite + React + Som</h1>
-      <h2>Som add new string</h2>           
+export class App extends Component {
+  render() {
+    return <>      
+      <h1>Som</h1> 
+      <h2>Rest code</h2>
     </>
-  )
+  }
 }
-
-export default App
