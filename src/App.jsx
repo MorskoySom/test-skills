@@ -7,24 +7,38 @@ import './App.css'
 export class App extends Component {
   state = {
     allQuestions: bodyQuestions,
-    categoryType: "географія",
+    categoryType: 'усі',
+    answersQuantity: '4',
+    questionNumber: '5',
   }
+
+  changeQuestionNumber = newQuestionNumber => {
+    this.setState({ questionNumber: newQuestionNumber })
+  }
+
+  changeAnswersQuantity = newAnswersQuantity => {
+    this.setState({ answersQuantity: newAnswersQuantity })
+  };
 
   changeCategoryType = newTypeCategory => {
     this.setState({ categoryType: newTypeCategory })
   };
   
-  getQuestionsByCategory = (category) => {    
-    const categoryObject = this.state.allQuestions.find(cat => cat.category === category);    
-    return categoryObject ? categoryObject.questions : [];
-  };
+  getQuestionsByCategory = (category) => {
+    if (category === 'усі') {
+      return this.state.allQuestions.flatMap(cat => cat.questions);
+    } else {
+      const categoryObject = this.state.allQuestions.find(cat => cat.category === category);
+      return categoryObject ? categoryObject.questions : [];
+    }
+  }
 
 
 
   render() {
-    const { categoryType } = this.state;
-    const geographyQuestions = this.getQuestionsByCategory(categoryType);
-    const parts = this.state.allQuestions.map(item => item.category);
+    const { categoryType, answersQuantity, questionNumber } = this.state;
+    const geographyQuestions = this.getQuestionsByCategory(categoryType);    
+    const parts = [...this.state.allQuestions.map(item => item.category), 'усі'];
 
     return (
       <>
@@ -32,9 +46,15 @@ export class App extends Component {
         <FormTestCard
           categories={parts}
           selectedCategory={categoryType}
+          answersQuantity={answersQuantity}
+          questionNumber={questionNumber}
           onChangeCategory={this.changeCategoryType}
+          onChangeAnswersQuantity={this.changeAnswersQuantity}
+          onChangeQuestionNumber={this.changeQuestionNumber}
         />      
-        <TestCardList quests={ geographyQuestions } />      
+        <TestCardList
+          quests={geographyQuestions}
+          answersQuantity={answersQuantity} />      
       </>
     )
   }

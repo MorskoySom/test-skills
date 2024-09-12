@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
 import TestCard from '../TestCard/TestCard.jsx';
 
-export const TestCardList = ({ quests }) => {
-    return (
+export const TestCardList = ({ quests, answersQuantity }) => {
+  return (
+    <>
+        <h2>Cards List</h2>
         <ul>
             {quests.map(quest => (
               <li key={quest.id}>
-                <TestCard item={ quest } />
+                <TestCard item={ quest } answersQuantity={answersQuantity} />
               </li>              
             ))}
         </ul>
+    </>
     );
 };
 
@@ -20,6 +23,7 @@ TestCardList.propTypes = {
       question: PropTypes.string.isRequired
     })
   ).isRequired,
+  answersQuantity: PropTypes.string.isRequired,
 };
 
 export default TestCardList;

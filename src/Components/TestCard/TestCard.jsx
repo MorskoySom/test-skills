@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
 
-export const TestCard = ({ item : {question, options, correctAnswer }}) => {
+export const TestCard = ({ item: { question, options, correctAnswer }, answersQuantity }) => {
+  const finalOptions = options.slice(0, +answersQuantity - 1);  
+  
+  const randomIndex = Math.floor(Math.random() * (+answersQuantity));
+  finalOptions.splice(randomIndex, 0, correctAnswer);  
+
   return (
     <div>
       <div>{question}</div>
       <div>
-        {options.map((option, index) => (
+        {finalOptions.map((option, index) => (
           <div key={index}>{option}</div>
         ))}
       </div>
@@ -20,6 +25,8 @@ TestCard.propTypes = {
       correctAnswer: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
+  answersQuantity: PropTypes.string.isRequired,
 };
 
 export default TestCard;
+
