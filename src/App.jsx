@@ -7,21 +7,40 @@ import './App.css'
 export class App extends Component {
   state = {
     allQuestions: bodyQuestions,
-    categoryType: 'усі',
-    answersQuantity: '4',
-    questionNumber: '5',
+    filterCard: {
+      categoryType: 'усі',
+      answersQuantity: '4',
+      questionNumber: '5',
+    } 
+    
+    
   }
 
   changeQuestionNumber = newQuestionNumber => {
-    this.setState({ questionNumber: newQuestionNumber })
+    this.setState(prevState => ({
+      filterCard: {
+        ...prevState.filterCard,
+        questionNumber: newQuestionNumber
+      }
+    }))
   }
 
   changeAnswersQuantity = newAnswersQuantity => {
-    this.setState({ answersQuantity: newAnswersQuantity })
+    this.setState(prevState => ({
+      filterCard: {
+        ...prevState.filterCard,
+        answersQuantity: newAnswersQuantity
+      }
+    }))
   };
 
   changeCategoryType = newTypeCategory => {
-    this.setState({ categoryType: newTypeCategory })
+    this.setState(prevState => ({
+      filterCard: {
+        ...prevState.filterCard,
+        categoryType: newTypeCategory
+      }
+    }))
   };
   
   getQuestionsByCategory = (category) => {
@@ -36,26 +55,33 @@ export class App extends Component {
 
 
   render() {
-    const { categoryType, answersQuantity, questionNumber } = this.state;
+    const { categoryType } = this.state.filterCard;
     const geographyQuestions = this.getQuestionsByCategory(categoryType);    
-    const parts = [...this.state.allQuestions.map(item => item.category), 'усі'];
+    const parts = [ 'усі', ...this.state.allQuestions.map(item => item.category)];
 
     return (
       <>
         <div>Header</div>  
         <FormTestCard
           categories={parts}
-          selectedCategory={categoryType}
-          answersQuantity={answersQuantity}
-          questionNumber={questionNumber}
+          filterCard={this.state.filterCard}
+          // selectedCategory={categoryType}
+          // answersQuantity={answersQuantity}
+          // questionNumber={questionNumber}
           onChangeCategory={this.changeCategoryType}
           onChangeAnswersQuantity={this.changeAnswersQuantity}
           onChangeQuestionNumber={this.changeQuestionNumber}
         />      
         <TestCardList
+          filterCard={this.state.filterCard}
+          // questionNumber={questionNumber}
+          // answersQuantity={answersQuantity}
           quests={geographyQuestions}
-          answersQuantity={answersQuantity} />      
+        />      
       </>
     )
   }
 }
+
+
+// npm run deploy

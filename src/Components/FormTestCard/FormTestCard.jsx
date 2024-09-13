@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 
-export const FormTestCard = ({ categories, selectedCategory, onChangeCategory, answersQuantity, onChangeAnswersQuantity, questionNumber, onChangeQuestionNumber }) => {
+export const FormTestCard = ({
+    filterCard: { categoryType, answersQuantity, questionNumber },
+    categories,
+    onChangeCategory,
+    onChangeAnswersQuantity,
+    onChangeQuestionNumber }) => {
     return (
         <>
             <h2>FormTestCard</h2>
             <label htmlFor="category-select">Оберіть тему</label>
             <select
                 id="category-select"
-                value={selectedCategory}
+                value={categoryType}
                 onChange={evt => onChangeCategory(evt.target.value)}>                
                 {categories.map(part => (                        
                         <option key={nanoid()} value={part}>
@@ -32,11 +37,13 @@ export const FormTestCard = ({ categories, selectedCategory, onChangeCategory, a
 }
 
 FormTestCard.propTypes = {
+    filterCard: PropTypes.shape({
+        categoryType: PropTypes.string.isRequired,
+        answersQuantity: PropTypes.string.isRequired,
+        questionNumber: PropTypes.string.isRequired,
+    }),   
     categories: PropTypes.array.isRequired,
-    selectedCategory: PropTypes.string.isRequired,
     onChangeCategory: PropTypes.func.isRequired,
-    answersQuantity: PropTypes.string.isRequired,
-    questionNumber: PropTypes.string.isRequired,
     onChangeAnswersQuantity: PropTypes.func.isRequired,
     onChangeQuestionNumber: PropTypes.func.isRequired,
 };
