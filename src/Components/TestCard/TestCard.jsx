@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 
-export const TestCard = ({ item: { question, options, correctAnswer }, answersQuantity }) => {
-  const finalOptions = options.slice(0, +answersQuantity - 1);  
+export const TestCard = (
+  { item: { question, options, correctAnswer },
+    answersQuantity }) => {
   
+  const finalOptions = options.slice(0, +answersQuantity - 1);    
   const randomIndex = Math.floor(Math.random() * (+answersQuantity));
   finalOptions.splice(randomIndex, 0, correctAnswer);  
 

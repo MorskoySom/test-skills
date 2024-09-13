@@ -16,32 +16,14 @@ export class App extends Component {
     
   }
 
-  changeQuestionNumber = newQuestionNumber => {
+  changefilterCard = (key, value) => {
     this.setState(prevState => ({
       filterCard: {
         ...prevState.filterCard,
-        questionNumber: newQuestionNumber
+        [key]: value
       }
     }))
   }
-
-  changeAnswersQuantity = newAnswersQuantity => {
-    this.setState(prevState => ({
-      filterCard: {
-        ...prevState.filterCard,
-        answersQuantity: newAnswersQuantity
-      }
-    }))
-  };
-
-  changeCategoryType = newTypeCategory => {
-    this.setState(prevState => ({
-      filterCard: {
-        ...prevState.filterCard,
-        categoryType: newTypeCategory
-      }
-    }))
-  };
   
   getQuestionsByCategory = (category) => {
     if (category === 'усі') {
@@ -64,18 +46,14 @@ export class App extends Component {
         <div>Header</div>  
         <FormTestCard
           categories={parts}
-          filterCard={this.state.filterCard}
-          // selectedCategory={categoryType}
-          // answersQuantity={answersQuantity}
-          // questionNumber={questionNumber}
+          filterCard={this.state.filterCard}         
           onChangeCategory={this.changeCategoryType}
           onChangeAnswersQuantity={this.changeAnswersQuantity}
           onChangeQuestionNumber={this.changeQuestionNumber}
+          onChangefilterCard={this.changefilterCard}
         />      
         <TestCardList
-          filterCard={this.state.filterCard}
-          // questionNumber={questionNumber}
-          // answersQuantity={answersQuantity}
+          filterCard={this.state.filterCard}          
           quests={geographyQuestions}
         />      
       </>

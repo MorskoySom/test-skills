@@ -3,10 +3,8 @@ import { nanoid } from 'nanoid';
 
 export const FormTestCard = ({
     filterCard: { categoryType, answersQuantity, questionNumber },
-    categories,
-    onChangeCategory,
-    onChangeAnswersQuantity,
-    onChangeQuestionNumber }) => {
+    categories,    
+    onChangefilterCard }) => {
     return (
         <>
             <h2>FormTestCard</h2>
@@ -14,7 +12,7 @@ export const FormTestCard = ({
             <select
                 id="category-select"
                 value={categoryType}
-                onChange={evt => onChangeCategory(evt.target.value)}>                
+                onChange={evt => onChangefilterCard('categoryType', evt.target.value)}>                
                 {categories.map(part => (                        
                         <option key={nanoid()} value={part}>
                             {part}
@@ -25,13 +23,16 @@ export const FormTestCard = ({
             <select
                 id="answers_quantity_select"
                 value={answersQuantity}
-                onChange={e => onChangeAnswersQuantity(e.target.value)} >
+                onChange={e => onChangefilterCard('answersQuantity', e.target.value)} >
                     <option value='3'>3</option>
                     <option value='4'>4</option>
                     <option value='6'>6</option>
             </select>
             <label htmlFor="question_number">Кількість варіантів відповідей не більше 20ти</label>
-            <input id='question_number' type='text' value={questionNumber} onChange={e => onChangeQuestionNumber(e.target.value)}/>
+            <input
+                id='question_number'
+                type='text' value={questionNumber}
+                onChange={e => onChangefilterCard('questionNumber', e.target.value)} />
         </>
     )
 }
@@ -42,8 +43,6 @@ FormTestCard.propTypes = {
         answersQuantity: PropTypes.string.isRequired,
         questionNumber: PropTypes.string.isRequired,
     }),   
-    categories: PropTypes.array.isRequired,
-    onChangeCategory: PropTypes.func.isRequired,
-    onChangeAnswersQuantity: PropTypes.func.isRequired,
-    onChangeQuestionNumber: PropTypes.func.isRequired,
+    categories: PropTypes.array.isRequired,    
+    onChangefilterCard: PropTypes.func.isRequired,
 };
