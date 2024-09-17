@@ -10,13 +10,13 @@ export const TestCard = (
 
   return (
     <div>
-      <div>{question}</div>
+      <h4>{question}</h4>
       <div>
         {finalOptions.map((option, index) => (
           <div key={index}>{option}</div>
         ))}
       </div>
-          <h2>{ correctAnswer }</h2>
+          <h3>{ correctAnswer }</h3>
     </div>
   );
 };

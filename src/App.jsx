@@ -8,12 +8,10 @@ export class App extends Component {
   state = {
     allQuestions: bodyQuestions,
     filterCard: {
-      categoryType: 'усі',
-      answersQuantity: '4',
-      questionNumber: '5',
-    } 
-    
-    
+      categoryType: "наука",
+      answersQuantity: '6',
+      questionNumber: '15',
+    }    
   }
 
   changefilterCard = (key, value) => {
@@ -33,8 +31,6 @@ export class App extends Component {
       return categoryObject ? categoryObject.questions : [];
     }
   }
-
-
 
   render() {
     const { categoryType } = this.state.filterCard;

@@ -13,9 +13,9 @@ export const FormTestCard = ({
                 id="category-select"
                 value={categoryType}
                 onChange={evt => onChangefilterCard('categoryType', evt.target.value)}>                
-                {categories.map(part => (                        
-                        <option key={nanoid()} value={part}>
-                            {part}
+                {categories.map(category => (                        
+                        <option key={nanoid()} value={category}>
+                            {category}
                         </option>
                     ))}                
             </select>
@@ -26,9 +26,10 @@ export const FormTestCard = ({
                 onChange={e => onChangefilterCard('answersQuantity', e.target.value)} >
                     <option value='3'>3</option>
                     <option value='4'>4</option>
+                    <option value='5'>5</option>
                     <option value='6'>6</option>
             </select>
-            <label htmlFor="question_number">Кількість варіантів відповідей не більше 20ти</label>
+            <label htmlFor="question_number">Кількість питань</label>
             <input
                 id='question_number'
                 type='text' value={questionNumber}
